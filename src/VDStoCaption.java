@@ -34,29 +34,12 @@ import java.util.regex.Pattern;
         }
 
         public void outtimeDeleter(String chunk){
-            //System.out.println(chunk);
-
-            Pattern lowerP = Pattern.compile("scripted to");
-            Matcher lowerM = lowerP.matcher(chunk);
-            Pattern upperP = Pattern.compile("Scripted to");
-            Matcher upperM = upperP.matcher(chunk);
-
-            Pattern timecodeP = Pattern.compile("\\d\\d:\\d\\d:\\d\\d:\\d\\d");
-            Matcher timecodeM = timecodeP.matcher(chunk);
-
-            boolean hasFourTimecodes = true;
-
-            if (chunk.length() > 24) {
-                hasFourTimecodes = timecodeM.find(24);
-            }
-
-            boolean isSlate = (lowerM.find() || upperM.find()) && !hasFourTimecodes;
 
             Pattern wordPattern = Pattern.compile("\\w");
             Matcher wordMatcher = wordPattern.matcher(chunk);
             boolean hasWords = wordMatcher.find();
 
-            if (!hasWords /*|| isSlate*/) {
+            if (!hasWords) {
                 return;
             }
 
@@ -72,8 +55,6 @@ import java.util.regex.Pattern;
             String fullDescription = fullOuttime + "\n" + descriptionText;
 
             descriptionWriter(fullDescription);
-
-
         }
 
 
