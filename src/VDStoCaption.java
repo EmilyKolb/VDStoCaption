@@ -44,15 +44,16 @@ import java.util.regex.Pattern;
             }
 
             chunk = chunk.trim();
-            String[] wholeLine = chunk.split("\n");
+            String[] wholeLine = chunk.split("\r\n");
             String fullOuttime = wholeLine[0];
+            String inTime = "";
             if (fullOuttime.length() > 10) {
-                fullOuttime = fullOuttime.substring(0, 11);
+                inTime = fullOuttime.substring(0, 11);
             }
 
             String[] descriptionArray = Arrays.copyOfRange(wholeLine,1,wholeLine.length);
-            String descriptionText = String.join("",descriptionArray);
-            String fullDescription = fullOuttime + "\n" + descriptionText;
+            String descriptionText = String.join("\r\n",descriptionArray);
+            String fullDescription = inTime + "\r\n" + descriptionText;
 
             descriptionWriter(fullDescription);
         }
@@ -79,8 +80,9 @@ import java.util.regex.Pattern;
             }
 
             if (fileOpened){
-                toFile.println(line);
-                toFile.print("\n");
+                toFile.print(line);
+                toFile.print("\r\n");
+                toFile.print("\r\n");
             }
 
             toFile.flush();
